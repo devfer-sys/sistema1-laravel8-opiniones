@@ -20,6 +20,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/opiniones', [OpinionController::class, 'index'])->name('opiniones.index');
     Route::delete('/opiniones/{opinion}', [OpinionController::class, 'destroy'])->name('opiniones.destroy');
 
+    Route::get('/opiniones/{opinion}/edit', [OpinionController::class, 'edit'])
+    ->name('opiniones.edit');
+
+    Route::put('/opiniones/{opinion}', [OpinionController::class, 'update'])
+    ->name('opiniones.update');
+
     Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
     Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
     Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
