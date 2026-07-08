@@ -78,5 +78,48 @@
             </form>
         </div>
     </div>
+
+    {{-- MODIFICACIÓN PRINCIPAL: Sección de Opiniones Destacadas (5-10 estrellas) --}}
+    <div class="card shadow mt-5">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Opiniones Destacadas de Clientes ⭐ (5 a 10 Estrellas)</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Producto</th>
+                            <th>Persona</th>
+                            <th>Valoración</th>
+                            <th>Comentario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($opinionesDestacadas as $opinion)
+                            <tr>
+                                <td class="align-middle"><strong>{{ $opinion->producto }}</strong></td>
+                                <td class="align-middle">{{ $opinion->nombre_persona }}</td>
+                                <td class="align-middle text-warning">
+                                    <strong>{{ $opinion->valoracion }} / 10 ⭐</strong>
+                                </td>
+                                <td class="align-middle">{{ $opinion->comentario }}</td>
+                                <td class="align-middle text-muted small">
+                                    {{ $opinion->created_at->format('d/m/Y H:i') }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-muted">
+                                    No hay opiniones destacadas registradas todavía.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

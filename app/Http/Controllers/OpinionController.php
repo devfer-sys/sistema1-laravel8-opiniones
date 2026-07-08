@@ -9,7 +9,14 @@ class OpinionController extends Controller
 {
     public function create()
     {
-        return view('opiniones.create');
+        // Traemos SOLO las opiniones de 5 a 10 estrellas para mostrarlas abajo del formulario
+        $opinionesDestacadas = Opinion::with('usuario')
+            ->whereBetween('valoracion', [5, 10])
+            ->latest()
+            ->get();
+
+        // Le pasamos las opiniones destacadas a la vista del formulario
+        return view('opiniones.create', compact('opinionesDestacadas'));
     }
 
     public function store(Request $request)
@@ -34,12 +41,8 @@ class OpinionController extends Controller
 
     public function index()
     {
-        // Modificado: Agregamos whereBetween para filtrar de 5 a 10 estrellas
-        // Manteniendo el conector with('usuario') y el ordenamiento latest()
-        $opiniones = Opinion::with('usuario')
-            ->whereBetween('valoracion', [5, 10])
-            ->latest()
-            ->get();
+        // Volvemos a mostrar TODAS las opiniones en la lista de gestión interna
+        $opiniones = Opinion::with('usuario')->latest()->get();
 
         return view('opiniones.index', compact('opiniones'));
     }
@@ -74,8 +77,8 @@ class OpinionController extends Controller
         ]);
 
         return redirect()
-                ->route('opiniones.index')
-                ->with('success','Opinión actualizada correctamente.');
+            ->route('opiniones.index')
+            ->with('success', 'Opinión actualizada correctamente.');
     }
 
     public function destroy(Opinion $opinion)
