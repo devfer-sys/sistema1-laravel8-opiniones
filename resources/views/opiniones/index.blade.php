@@ -48,14 +48,25 @@
 
                     @if(auth()->user()->rol === 'admin')
                         <td>
-                            <form action="{{ route('opiniones.destroy', $opinion) }}" method="POST">
+
+                            <a href="{{ route('opiniones.edit', $opinion) }}"
+                            class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <form action="{{ route('opiniones.destroy', $opinion) }}"
+                                method="POST"
+                                style="display:inline">
+
                                 @csrf
                                 @method('DELETE')
 
                                 <button class="btn btn-danger btn-sm">
                                     Eliminar
                                 </button>
+
                             </form>
+
                         </td>
                     @endif
                 </tr>
