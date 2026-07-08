@@ -34,7 +34,12 @@ class OpinionController extends Controller
 
     public function index()
     {
-        $opiniones = Opinion::with('usuario')->latest()->get();
+        // Modificado: Agregamos whereBetween para filtrar de 5 a 10 estrellas
+        // Manteniendo el conector with('usuario') y el ordenamiento latest()
+        $opiniones = Opinion::with('usuario')
+            ->whereBetween('valoracion', [5, 10])
+            ->latest()
+            ->get();
 
         return view('opiniones.index', compact('opiniones'));
     }
