@@ -17,7 +17,7 @@ class OpinionController extends Controller
         $request->validate([
             'producto' => 'required|string|max:255',
             'nombre_persona' => 'required|string|max:255',
-            'valoracion' => 'required|integer|min:1|max:5',
+            'valoracion' => 'required|integer|min:1|max:10',
             'comentario' => 'required|string',
         ]);
 

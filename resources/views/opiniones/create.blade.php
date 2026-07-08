@@ -16,7 +16,12 @@
 
             @if($errors->any())
                 <div class="alert alert-danger">
-                    Revisa los datos ingresados.
+                    <strong>Revisa los datos ingresados:</strong>
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
 
@@ -42,6 +47,11 @@
                         <option value="3">3 estrellas</option>
                         <option value="4">4 estrellas</option>
                         <option value="5">5 estrellas</option>
+                        <option value="6">6 estrellas</option>
+                        <option value="7">7 estrellas</option>
+                        <option value="8">8 estrellas</option>
+                        <option value="9">9 estrellas</option>
+                        <option value="10">10 estrellas</option>
                     </select>
                 </div>
 
